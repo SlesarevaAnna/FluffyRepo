@@ -54,9 +54,7 @@ namespace FluffyFriend {
         
         private cage_name_plusDataTable tablecage_name_plus;
         
-        private global::System.Data.DataRelation relationfeedings_foods;
-        
-        private global::System.Data.DataRelation relationFK_placements_cages;
+        private cages_empty_occupiedDataTable tablecages_empty_occupied;
         
         private global::System.Data.DataRelation relationfeedings_pets;
         
@@ -70,11 +68,15 @@ namespace FluffyFriend {
         
         private global::System.Data.DataRelation relationFK_supplies_pets;
         
-        private global::System.Data.DataRelation relationFK_placements_pets;
-        
         private global::System.Data.DataRelation relationspecies_pets;
         
         private global::System.Data.DataRelation relationpets_sexes;
+        
+        private global::System.Data.DataRelation relationFK_placements_cages;
+        
+        private global::System.Data.DataRelation relationFK_placements_pets;
+        
+        private global::System.Data.DataRelation relationfoods_feedings;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -148,6 +150,9 @@ namespace FluffyFriend {
                 }
                 if ((ds.Tables["cage_name_plus"] != null)) {
                     base.Tables.Add(new cage_name_plusDataTable(ds.Tables["cage_name_plus"]));
+                }
+                if ((ds.Tables["cages_empty_occupied"] != null)) {
+                    base.Tables.Add(new cages_empty_occupiedDataTable(ds.Tables["cages_empty_occupied"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -319,6 +324,16 @@ namespace FluffyFriend {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public cages_empty_occupiedDataTable cages_empty_occupied {
+            get {
+                return this.tablecages_empty_occupied;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -428,6 +443,9 @@ namespace FluffyFriend {
                 }
                 if ((ds.Tables["cage_name_plus"] != null)) {
                     base.Tables.Add(new cage_name_plusDataTable(ds.Tables["cage_name_plus"]));
+                }
+                if ((ds.Tables["cages_empty_occupied"] != null)) {
+                    base.Tables.Add(new cages_empty_occupiedDataTable(ds.Tables["cages_empty_occupied"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -552,17 +570,23 @@ namespace FluffyFriend {
                     this.tablecage_name_plus.InitVars();
                 }
             }
-            this.relationfeedings_foods = this.Relations["feedings_foods"];
-            this.relationFK_placements_cages = this.Relations["FK_placements_cages"];
+            this.tablecages_empty_occupied = ((cages_empty_occupiedDataTable)(base.Tables["cages_empty_occupied"]));
+            if ((initTable == true)) {
+                if ((this.tablecages_empty_occupied != null)) {
+                    this.tablecages_empty_occupied.InitVars();
+                }
+            }
             this.relationfeedings_pets = this.Relations["feedings_pets"];
             this.relationFK_supplies_providers = this.Relations["FK_supplies_providers"];
             this.relationFK_transactions_customers = this.Relations["FK_transactions_customers"];
             this.relationFK_customers_sexes = this.Relations["FK_customers_sexes"];
             this.relationFK_transactions_pets = this.Relations["FK_transactions_pets"];
             this.relationFK_supplies_pets = this.Relations["FK_supplies_pets"];
-            this.relationFK_placements_pets = this.Relations["FK_placements_pets"];
             this.relationspecies_pets = this.Relations["species_pets"];
             this.relationpets_sexes = this.Relations["pets_sexes"];
+            this.relationFK_placements_cages = this.Relations["FK_placements_cages"];
+            this.relationFK_placements_pets = this.Relations["FK_placements_pets"];
+            this.relationfoods_feedings = this.Relations["foods_feedings"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -603,29 +627,8 @@ namespace FluffyFriend {
             base.Tables.Add(this.tablecustomer_name_plus);
             this.tablecage_name_plus = new cage_name_plusDataTable();
             base.Tables.Add(this.tablecage_name_plus);
-            global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("feedings_foods", new global::System.Data.DataColumn[] {
-                        this.tablefoods.food_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablefeedings.food_idColumn});
-            this.tablefeedings.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.SetDefault;
-            fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_placements_cages", new global::System.Data.DataColumn[] {
-                        this.tablecages.cage_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableplacements.cage_idColumn});
-            this.tableplacements.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.SetDefault;
-            fkc.UpdateRule = global::System.Data.Rule.None;
-            this.relationfeedings_foods = new global::System.Data.DataRelation("feedings_foods", new global::System.Data.DataColumn[] {
-                        this.tablefoods.food_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablefeedings.food_idColumn}, false);
-            this.Relations.Add(this.relationfeedings_foods);
-            this.relationFK_placements_cages = new global::System.Data.DataRelation("FK_placements_cages", new global::System.Data.DataColumn[] {
-                        this.tablecages.cage_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableplacements.cage_idColumn}, false);
-            this.Relations.Add(this.relationFK_placements_cages);
+            this.tablecages_empty_occupied = new cages_empty_occupiedDataTable();
+            base.Tables.Add(this.tablecages_empty_occupied);
             this.relationfeedings_pets = new global::System.Data.DataRelation("feedings_pets", new global::System.Data.DataColumn[] {
                         this.tablepets.pet_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablefeedings.pet_idColumn}, false);
@@ -650,10 +653,6 @@ namespace FluffyFriend {
                         this.tablepets.pet_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablesupplies.pet_idColumn}, false);
             this.Relations.Add(this.relationFK_supplies_pets);
-            this.relationFK_placements_pets = new global::System.Data.DataRelation("FK_placements_pets", new global::System.Data.DataColumn[] {
-                        this.tablepets.pet_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableplacements.pet_idColumn}, false);
-            this.Relations.Add(this.relationFK_placements_pets);
             this.relationspecies_pets = new global::System.Data.DataRelation("species_pets", new global::System.Data.DataColumn[] {
                         this.tablespecies.specie_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablepets.specieColumn}, false);
@@ -662,6 +661,18 @@ namespace FluffyFriend {
                         this.tablesexes.sex_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablepets.sexColumn}, false);
             this.Relations.Add(this.relationpets_sexes);
+            this.relationFK_placements_cages = new global::System.Data.DataRelation("FK_placements_cages", new global::System.Data.DataColumn[] {
+                        this.tablecages.cage_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableplacements.cage_idColumn}, false);
+            this.Relations.Add(this.relationFK_placements_cages);
+            this.relationFK_placements_pets = new global::System.Data.DataRelation("FK_placements_pets", new global::System.Data.DataColumn[] {
+                        this.tablepets.pet_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableplacements.pet_idColumn}, false);
+            this.Relations.Add(this.relationFK_placements_pets);
+            this.relationfoods_feedings = new global::System.Data.DataRelation("foods_feedings", new global::System.Data.DataColumn[] {
+                        this.tablefoods.food_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tablefeedings.food_idColumn}, false);
+            this.Relations.Add(this.relationfoods_feedings);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -751,6 +762,12 @@ namespace FluffyFriend {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializecage_name_plus() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializecages_empty_occupied() {
             return false;
         }
         
@@ -853,6 +870,9 @@ namespace FluffyFriend {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void cage_name_plusRowChangeEventHandler(object sender, cage_name_plusRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void cages_empty_occupiedRowChangeEventHandler(object sender, cages_empty_occupiedRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1698,7 +1718,7 @@ namespace FluffyFriend {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public feedingsRow AddfeedingsRow(petsRow parentpetsRowByfeedings_pets, foodsRow parentfoodsRowByfeedings_foods, System.DateTime date_time, float weight) {
+            public feedingsRow AddfeedingsRow(petsRow parentpetsRowByfeedings_pets, foodsRow parentfoodsRowByfoods_feedings, System.DateTime date_time, float weight) {
                 feedingsRow rowfeedingsRow = ((feedingsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1709,8 +1729,8 @@ namespace FluffyFriend {
                 if ((parentpetsRowByfeedings_pets != null)) {
                     columnValuesArray[1] = parentpetsRowByfeedings_pets[0];
                 }
-                if ((parentfoodsRowByfeedings_foods != null)) {
-                    columnValuesArray[2] = parentfoodsRowByfeedings_foods[0];
+                if ((parentfoodsRowByfoods_feedings != null)) {
+                    columnValuesArray[2] = parentfoodsRowByfoods_feedings[0];
                 }
                 rowfeedingsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowfeedingsRow);
@@ -5654,6 +5674,282 @@ namespace FluffyFriend {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class cages_empty_occupiedDataTable : global::System.Data.TypedTableBase<cages_empty_occupiedRow> {
+            
+            private global::System.Data.DataColumn columncage_id;
+            
+            private global::System.Data.DataColumn columndate_time;
+            
+            private global::System.Data.DataColumn columnis_a_start;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public cages_empty_occupiedDataTable() {
+                this.TableName = "cages_empty_occupied";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal cages_empty_occupiedDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected cages_empty_occupiedDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn cage_idColumn {
+                get {
+                    return this.columncage_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn date_timeColumn {
+                get {
+                    return this.columndate_time;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn is_a_startColumn {
+                get {
+                    return this.columnis_a_start;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public cages_empty_occupiedRow this[int index] {
+                get {
+                    return ((cages_empty_occupiedRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event cages_empty_occupiedRowChangeEventHandler cages_empty_occupiedRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event cages_empty_occupiedRowChangeEventHandler cages_empty_occupiedRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event cages_empty_occupiedRowChangeEventHandler cages_empty_occupiedRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event cages_empty_occupiedRowChangeEventHandler cages_empty_occupiedRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Addcages_empty_occupiedRow(cages_empty_occupiedRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public cages_empty_occupiedRow Addcages_empty_occupiedRow(int cage_id, System.DateTime date_time, string is_a_start) {
+                cages_empty_occupiedRow rowcages_empty_occupiedRow = ((cages_empty_occupiedRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        cage_id,
+                        date_time,
+                        is_a_start};
+                rowcages_empty_occupiedRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowcages_empty_occupiedRow);
+                return rowcages_empty_occupiedRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                cages_empty_occupiedDataTable cln = ((cages_empty_occupiedDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new cages_empty_occupiedDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columncage_id = base.Columns["cage_id"];
+                this.columndate_time = base.Columns["date_time"];
+                this.columnis_a_start = base.Columns["is_a_start"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columncage_id = new global::System.Data.DataColumn("cage_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncage_id);
+                this.columndate_time = new global::System.Data.DataColumn("date_time", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate_time);
+                this.columnis_a_start = new global::System.Data.DataColumn("is_a_start", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnis_a_start);
+                this.columnis_a_start.MaxLength = 5;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public cages_empty_occupiedRow Newcages_empty_occupiedRow() {
+                return ((cages_empty_occupiedRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new cages_empty_occupiedRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(cages_empty_occupiedRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.cages_empty_occupiedRowChanged != null)) {
+                    this.cages_empty_occupiedRowChanged(this, new cages_empty_occupiedRowChangeEvent(((cages_empty_occupiedRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.cages_empty_occupiedRowChanging != null)) {
+                    this.cages_empty_occupiedRowChanging(this, new cages_empty_occupiedRowChangeEvent(((cages_empty_occupiedRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.cages_empty_occupiedRowDeleted != null)) {
+                    this.cages_empty_occupiedRowDeleted(this, new cages_empty_occupiedRowChangeEvent(((cages_empty_occupiedRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.cages_empty_occupiedRowDeleting != null)) {
+                    this.cages_empty_occupiedRowDeleting(this, new cages_empty_occupiedRowChangeEvent(((cages_empty_occupiedRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Removecages_empty_occupiedRow(cages_empty_occupiedRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FriendDataSet ds = new FriendDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "cages_empty_occupiedDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class cagesRow : global::System.Data.DataRow {
@@ -6144,23 +6440,23 @@ namespace FluffyFriend {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public foodsRow foodsRow {
-                get {
-                    return ((foodsRow)(this.GetParentRow(this.Table.ParentRelations["feedings_foods"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["feedings_foods"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public petsRow petsRow {
                 get {
                     return ((petsRow)(this.GetParentRow(this.Table.ParentRelations["feedings_pets"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["feedings_pets"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public foodsRow foodsRow {
+                get {
+                    return ((foodsRow)(this.GetParentRow(this.Table.ParentRelations["foods_feedings"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["foods_feedings"]);
                 }
             }
             
@@ -6244,11 +6540,11 @@ namespace FluffyFriend {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public feedingsRow[] GetfeedingsRows() {
-                if ((this.Table.ChildRelations["feedings_foods"] == null)) {
+                if ((this.Table.ChildRelations["foods_feedings"] == null)) {
                     return new feedingsRow[0];
                 }
                 else {
-                    return ((feedingsRow[])(base.GetChildRows(this.Table.ChildRelations["feedings_foods"])));
+                    return ((feedingsRow[])(base.GetChildRows(this.Table.ChildRelations["foods_feedings"])));
                 }
             }
         }
@@ -7723,6 +8019,105 @@ namespace FluffyFriend {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class cages_empty_occupiedRow : global::System.Data.DataRow {
+            
+            private cages_empty_occupiedDataTable tablecages_empty_occupied;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal cages_empty_occupiedRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablecages_empty_occupied = ((cages_empty_occupiedDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int cage_id {
+                get {
+                    try {
+                        return ((int)(this[this.tablecages_empty_occupied.cage_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'cage_id\' в таблице \'cages_empty_occupied\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecages_empty_occupied.cage_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime date_time {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablecages_empty_occupied.date_timeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'date_time\' в таблице \'cages_empty_occupied\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecages_empty_occupied.date_timeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string is_a_start {
+                get {
+                    try {
+                        return ((string)(this[this.tablecages_empty_occupied.is_a_startColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'is_a_start\' в таблице \'cages_empty_occupied\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablecages_empty_occupied.is_a_startColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscage_idNull() {
+                return this.IsNull(this.tablecages_empty_occupied.cage_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcage_idNull() {
+                this[this.tablecages_empty_occupied.cage_idColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isdate_timeNull() {
+                return this.IsNull(this.tablecages_empty_occupied.date_timeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setdate_timeNull() {
+                this[this.tablecages_empty_occupied.date_timeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isis_a_startNull() {
+                return this.IsNull(this.tablecages_empty_occupied.is_a_startColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setis_a_startNull() {
+                this[this.tablecages_empty_occupied.is_a_startColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -8218,6 +8613,40 @@ namespace FluffyFriend {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public cage_name_plusRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class cages_empty_occupiedRowChangeEvent : global::System.EventArgs {
+            
+            private cages_empty_occupiedRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public cages_empty_occupiedRowChangeEvent(cages_empty_occupiedRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public cages_empty_occupiedRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -9263,19 +9692,14 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("weight", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "weight", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE \"public\".feedings\r\nSET          pet_id = ?, food_id = ?, date_time = ?, we" +
-                "ight = ?\r\nWHERE  (feeding_id = ?) AND (pet_id = ?) AND (food_id = ?) AND (date_t" +
-                "ime = ?) AND (weight = ?)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE       \"public\".feedings\r\nSET                pet_id = ?, food_id = ?, date_" +
+                "time = ?, weight = ?\r\nWHERE        (feeding_id = ?)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("pet_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pet_id", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("food_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "food_id", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("date_time", global::System.Data.Odbc.OdbcType.DateTime, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "date_time", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("weight", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "weight", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_feeding_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "feeding_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_pet_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pet_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_food_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "food_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_date_time", global::System.Data.Odbc.OdbcType.DateTime, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "date_time", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_weight", global::System.Data.Odbc.OdbcType.Decimal, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "weight", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9288,12 +9712,18 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[2];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT \"feeding_id\", \"pet_id\", \"food_id\", \"date_time\", \"weight\" FROM \"public\".\"fe" +
                 "edings\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        feeding_id, pet_id, food_id, date_time, weight\r\nFROM            \"pu" +
+                "blic\".feedings\r\nWHERE        (pet_id = ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("pet_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pet_id", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9318,6 +9748,20 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
             FriendDataSet.feedingsDataTable dataTable = new FriendDataSet.feedingsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByParam(FriendDataSet.feedingsDataTable dataTable, int pet_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(pet_id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9415,7 +9859,7 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int pet_id, int food_id, System.DateTime date_time, global::System.Nullable<decimal> weight, int Original_feeding_id, int Original_pet_id, int Original_food_id, System.DateTime Original_date_time, global::System.Nullable<decimal> Original_weight) {
+        public virtual int Update(int pet_id, int food_id, System.DateTime date_time, global::System.Nullable<decimal> weight, int Original_feeding_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(pet_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(food_id));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(date_time));
@@ -9426,15 +9870,6 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_feeding_id));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_pet_id));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_food_id));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_date_time));
-            if ((Original_weight.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_weight.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10440,20 +10875,15 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("comments", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comments", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.Odbc.OdbcCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE ""fluffy_friend"".""public"".""placements"" SET ""date_time"" = ?, ""pet_id"" = ?, ""cage_id"" = ?, ""is_a_start"" = ?, ""comments"" = ? WHERE ((""placement_id"" = ?) AND (""date_time"" = ?) AND (""pet_id"" = ?) AND (""cage_id"" = ?) AND (""is_a_start"" = ?) AND ((? = 1 AND ""comments"" IS NULL) OR (""comments"" = ?)))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE       \"public\".placements\r\nSET                date_time = ?, pet_id = ?, c" +
+                "age_id = ?, is_a_start = ?, comments = ?\r\nWHERE        (placement_id = ?)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("date_time", global::System.Data.Odbc.OdbcType.DateTime, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "date_time", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("pet_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pet_id", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("cage_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "cage_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("is_a_start", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "is_a_start", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("comments", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comments", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("is_a_start", global::System.Data.Odbc.OdbcType.VarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "is_a_start", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("comments", global::System.Data.Odbc.OdbcType.NVarChar, 1024, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comments", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_placement_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "placement_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_date_time", global::System.Data.Odbc.OdbcType.DateTime, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "date_time", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_pet_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pet_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_cage_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "cage_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_is_a_start", global::System.Data.Odbc.OdbcType.VarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "is_a_start", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("IsNull_comments", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comments", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.Odbc.OdbcParameter("Original_comments", global::System.Data.Odbc.OdbcType.NVarChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comments", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10466,12 +10896,18 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[2];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT \"placement_id\", \"date_time\", \"pet_id\", \"cage_id\", \"is_a_start\", \"comments\"" +
                 " FROM \"public\".\"placements\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        placement_id, date_time, pet_id, cage_id, is_a_start, comments\r\nFRO" +
+                "M            \"public\".placements\r\nWHERE        (pet_id = ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("pet_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pet_id", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10496,6 +10932,20 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
             FriendDataSet.placementsDataTable dataTable = new FriendDataSet.placementsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByParam(FriendDataSet.placementsDataTable dataTable, int pet_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(pet_id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10605,7 +11055,7 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime date_time, int pet_id, int cage_id, string is_a_start, string comments, int Original_placement_id, System.DateTime Original_date_time, int Original_pet_id, int Original_cage_id, string Original_is_a_start, string Original_comments) {
+        public virtual int Update(System.DateTime date_time, int pet_id, int cage_id, string is_a_start, string comments, int Original_placement_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(date_time));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(pet_id));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(cage_id));
@@ -10616,28 +11066,12 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(is_a_start));
             }
             if ((comments == null)) {
-                throw new global::System.ArgumentNullException("comments");
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(comments));
             }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_placement_id));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_date_time));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_pet_id));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_cage_id));
-            if ((Original_is_a_start == null)) {
-                throw new global::System.ArgumentNullException("Original_is_a_start");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_is_a_start));
-            }
-            if ((Original_comments == null)) {
-                throw new global::System.ArgumentNullException("Original_comments");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_comments));
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -11921,12 +12355,18 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[2];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT \"supply_id\", \"date_time\", \"provider_id\", \"pet_id\", \"price\", \"comments\" FRO" +
                 "M \"public\".\"supplies\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        supply_id, date_time, provider_id, pet_id, price, comments\r\nFROM   " +
+                "         \"public\".supplies\r\nWHERE        (provider_id = ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("provider_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "provider_id", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11951,6 +12391,20 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
             FriendDataSet.suppliesDataTable dataTable = new FriendDataSet.suppliesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByParam(FriendDataSet.suppliesDataTable dataTable, int provider_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(provider_id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12266,12 +12720,18 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[2];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT \"transaction_id\", \"date_time\", \"customer_id\", \"pet_id\", \"amount\" FROM \"pub" +
                 "lic\".\"transactions\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        transaction_id, date_time, pet_id, amount, customer_id\r\nFROM       " +
+                "     \"public\".transactions\r\nWHERE        (customer_id = ?)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.Odbc.OdbcParameter("customer_id", global::System.Data.Odbc.OdbcType.Int, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "customer_id", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12296,6 +12756,20 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
             FriendDataSet.transactionsDataTable dataTable = new FriendDataSet.transactionsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByParam(FriendDataSet.transactionsDataTable dataTable, int customer_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(customer_id));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13084,6 +13558,175 @@ namespace FluffyFriend.FriendDataSetTableAdapters {
         public virtual FriendDataSet.cage_name_plusDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             FriendDataSet.cage_name_plusDataTable dataTable = new FriendDataSet.cage_name_plusDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class cages_empty_occupiedTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.Odbc.OdbcDataAdapter _adapter;
+        
+        private global::System.Data.Odbc.OdbcConnection _connection;
+        
+        private global::System.Data.Odbc.OdbcTransaction _transaction;
+        
+        private global::System.Data.Odbc.OdbcCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public cages_empty_occupiedTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected internal global::System.Data.Odbc.OdbcDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.Odbc.OdbcConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.Odbc.OdbcCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.Odbc.OdbcTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected global::System.Data.Odbc.OdbcCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.Odbc.OdbcDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "cages_empty_occupied";
+            tableMapping.ColumnMappings.Add("cage_id", "cage_id");
+            tableMapping.ColumnMappings.Add("date_time", "date_time");
+            tableMapping.ColumnMappings.Add("is_a_start", "is_a_start");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.Odbc.OdbcConnection();
+            this._connection.ConnectionString = global::FluffyFriend.Properties.Settings.Default.ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
+            this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT \"cage_id\", \"date_time\", \"is_a_start\" FROM \"public\".\"cages_empty_occupied\"";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FriendDataSet.cages_empty_occupiedDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FriendDataSet.cages_empty_occupiedDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FriendDataSet.cages_empty_occupiedDataTable dataTable = new FriendDataSet.cages_empty_occupiedDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
